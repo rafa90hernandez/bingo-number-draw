@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Irish Bingo Game</title>
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <main class="container">
+        <section class="game-card">
+            <div class="brand">RHDev Gaming</div>
+
+            <h1>Irish Bingo Game</h1>
+            <p>Choose a card, mark your numbers and call Bingo when you complete a full line.</p>
+
+            <div class="last-draw-area">
+                <span>Last Number Drawn</span>
+                <div id="lastNumber" class="last-number">--</div>
+            </div>
+
+            <div class="draw-area">
+                <h2>Drawn Numbers</h2>
+                <div id="drawnBalls" class="drawn-balls"></div>
+
+                <div id="progressInfo" class="progress-info">
+                    Drawn: 0 / 90 | Remaining: 90
+                </div>
+            </div>
+
+            <div id="bingoCard" class="bingo-card"></div>
+
+            <div class="actions">
+                <button id="startButton">Start Game</button>
+                <button id="bingoButton" class="bingo-button">Bingo!</button>
+                <button id="resetButton" class="secondary-button">New Card</button>
+            </div>
+
+            <p id="statusMessage" class="status-message">Click “Start Game” to begin.</p>
+        </section>
+    </main>
+
+    <div id="messageModal" class="message-modal">
+        <div class="message-box">
+            <h2 id="modalTitle"></h2>
+            <p id="modalText"></p>
+            <button id="closeModalButton">Continue</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

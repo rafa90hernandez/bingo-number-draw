@@ -1,0 +1,350 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle, #252525 0%, #050505 100%);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 100%;
+  padding: 20px;
+}
+
+.game-card {
+  max-width: 850px;
+  margin: 0 auto;
+  text-align: center;
+  background: #111;
+  padding: 30px;
+  border-radius: 24px;
+  box-shadow: 0 0 35px rgba(255, 215, 0, 0.25);
+}
+
+.brand {
+  color: #ffd700;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+}
+
+h1,
+h2 {
+  color: #ffd700;
+}
+
+p {
+  color: #ccc;
+  margin: 15px 0;
+}
+
+.last-draw-area {
+  margin: 25px auto;
+}
+
+.last-draw-area span {
+  color: #ccc;
+  display: block;
+  font-size: 14px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.last-number {
+  width: 130px;
+  height: 130px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #ffd700, #ffb300);
+  color: #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 34px;
+  font-weight: bold;
+  box-shadow: 0 0 35px rgba(255, 215, 0, 0.7);
+}
+
+.last-number.rolling {
+  animation: rollingBall 0.2s infinite;
+}
+
+.last-number.reveal {
+  animation: revealBall 0.45s ease;
+}
+
+.drawn-balls {
+  min-height: 70px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 15px 0 10px;
+  padding: 5px;
+  overflow: visible;
+}
+
+.ball {
+  min-width: 58px;
+  height: 48px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ffd700, #ffb300);
+  color: #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+  animation: ballPop 0.4s ease;
+  padding: 0 12px;
+}
+
+.ball.marked-ball {
+  background: linear-gradient(180deg, #00ff99, #00cc77);
+  color: #111;
+  box-shadow: 0 0 20px rgba(0, 255, 153, 0.9);
+}
+
+.progress-info {
+  color: #ffd700;
+  font-weight: bold;
+  margin: 15px 0 25px;
+}
+
+.bingo-card {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 6px;
+  max-width: 720px;
+  margin: 0 auto 25px;
+  background: #222;
+  padding: 12px;
+  border: 3px solid #ffd700;
+  border-radius: 18px;
+}
+
+.cell {
+  min-height: 58px;
+  background: #f5f5f5;
+  color: #111;
+  border-radius: 10px;
+  font-size: 22px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  border: 3px solid transparent;
+}
+
+.cell.empty {
+  background: #333;
+}
+
+.cell.number {
+  cursor: pointer;
+}
+
+.cell.marked {
+  background: linear-gradient(180deg, #ffd700, #ffb300);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+  transform: scale(0.96);
+}
+
+.cell.available-to-mark {
+  border: 3px solid #ffd700;
+  animation: pulseCell 1s infinite;
+}
+
+.actions {
+  margin-top: 20px;
+}
+
+button {
+  background: linear-gradient(180deg, #ffe600, #ffbf00);
+  color: #111;
+  border: none;
+  padding: 14px 28px;
+  margin: 8px;
+  font-size: 17px;
+  font-weight: bold;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.secondary-button {
+  background: #333;
+  color: #ffd700;
+  border: 1px solid #ffd700;
+}
+
+.bingo-button {
+  background: linear-gradient(180deg, #00ff99, #00cc77);
+}
+
+.status-message {
+  color: #ffd700;
+  font-weight: bold;
+}
+
+.message-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.message-modal.show {
+  display: flex;
+}
+
+.message-box {
+  width: 90%;
+  max-width: 480px;
+  background: #111;
+  border: 3px solid #ffd700;
+  border-radius: 24px;
+  padding: 35px;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+}
+
+.message-box.winner {
+  border: 4px solid #00ff99;
+  box-shadow: 0 0 60px rgba(0, 255, 153, 0.8);
+  animation: winnerPulse 1s infinite;
+}
+
+.message-box h2 {
+  font-size: 34px;
+  margin-bottom: 15px;
+}
+
+.message-box p {
+  font-size: 20px;
+}
+
+@keyframes pulseCell {
+  0% {
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 0 22px rgba(255, 215, 0, 1);
+  }
+
+  100% {
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.4);
+  }
+}
+
+@keyframes ballPop {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+
+  70% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes rollingBall {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+
+  50% {
+    transform: rotate(12deg) scale(1.06);
+  }
+
+  100% {
+    transform: rotate(-12deg) scale(1);
+  }
+}
+
+@keyframes revealBall {
+  0% {
+    transform: scale(0.4);
+    opacity: 0.3;
+  }
+
+  70% {
+    transform: scale(1.18);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes winnerPulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.03);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 650px) {
+  .game-card {
+    padding: 22px;
+  }
+
+  .last-number {
+    width: 105px;
+    height: 105px;
+    font-size: 28px;
+  }
+
+  .bingo-card {
+    gap: 4px;
+    padding: 8px;
+  }
+
+  .cell {
+    min-height: 42px;
+    font-size: 16px;
+    border-radius: 7px;
+  }
+
+  .ball {
+    min-width: 50px;
+    height: 40px;
+    font-size: 14px;
+  }
+}
